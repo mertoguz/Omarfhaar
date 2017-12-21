@@ -118,7 +118,7 @@ public class initFrame extends javax.swing.JFrame {
     private void btn_NegativeDirChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NegativeDirChooserActionPerformed
         ManageDir mdn = new ManageDir();
         JFileChooser fc = new JFileChooser();
-        //fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.showOpenDialog(null);
         
         if(fc.getSelectedFile() != null)
