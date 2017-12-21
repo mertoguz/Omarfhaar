@@ -1,1 +1,0 @@
-/home/mert/FinalProject/haar-cascades/Positives/2.jpg 1 44 28 100 46
