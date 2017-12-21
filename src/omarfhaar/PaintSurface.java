@@ -17,6 +17,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
@@ -27,28 +29,28 @@ import javax.swing.JComponent;
  */
   class PaintSurface extends JComponent {
     //ArrayList<Shape> shapes = new ArrayList<Shape>();
+    
     Shape shape;
     Rectangle rectangle;
     public BufferedImage img1;
-    String path = "İmage's path";
+    private String path;
     
+    //String path = "/home/mert/FinalProject/haar-cascades/Positives/2.jpg";
+    ImageP p = new ImageP();
    
     
 
     Point startDrag, endDrag;
 
     public PaintSurface() {
-        try {
-           
-            img1 = ImageIO.read(new File(path));
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        //createRectangle(path);
+        
+        
         
       this.addMouseListener(new MouseAdapter() {
         public void mousePressed(MouseEvent e) {
-            rectangle = new Rectangle();
-            rectangle.setFileName(path);
+            //rectangle = new Rectangle();
+            
             
           startDrag = new Point(e.getX(), e.getY());
           endDrag = startDrag;
@@ -66,8 +68,8 @@ import javax.swing.JComponent;
           
           rectangle.setWidth(Math.abs(endDrag.x - startDrag.x));
           rectangle.setHeight(Math.abs(endDrag.y - startDrag.y));
-          rectangle.printData();
-          rectangle.createTxt(rectangle.getFileName() ,rectangle.getStartDragX(), rectangle.getStartDragY(), rectangle.getWidth(), rectangle.getHeight());
+          //rectangle.printData();
+          //rectangle.createTxt(rectangle.getFileName() ,rectangle.getStartDragX(), rectangle.getStartDragY(), rectangle.getWidth(), rectangle.getHeight());
           startDrag = null;
           endDrag = null;
           repaint();
@@ -111,8 +113,39 @@ import javax.swing.JComponent;
         g2.draw(r);
       }
     }
+    
+   
+    public void createRectangle(String path){
+        try {
+            rectangle = new Rectangle();
+            rectangle.setFileName(path);
+            p.setImage(ImageIO.read(new File(path)));
+            p.rescale(path);
+            img1 = p.getImage();
+        } catch (IOException ex) {
+            Logger.getLogger(PaintSurface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
     private Rectangle2D.Float makeRectangle(int x1, int y1, int x2, int y2) {
       return new Rectangle2D.Float(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
     }
+    
+    public void removeRectangle(){
+        shape = null;
+        
+        repaint();        
+    }
+    
+    //Getter & Setter
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+    
   }
