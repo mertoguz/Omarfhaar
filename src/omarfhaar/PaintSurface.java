@@ -28,14 +28,14 @@ import javax.swing.JComponent;
  * @author mertoguz
  */
   class PaintSurface extends JComponent {
-    //ArrayList<Shape> shapes = new ArrayList<Shape>();
+    
     
     Shape shape;
     Rectangle rectangle;
     public BufferedImage img1;
     private String path;
     
-    //String path = "/home/mert/FinalProject/haar-cascades/Positives/2.jpg";
+    
     ImageP p = new ImageP();
    
     
@@ -49,7 +49,7 @@ import javax.swing.JComponent;
         
       this.addMouseListener(new MouseAdapter() {
         public void mousePressed(MouseEvent e) {
-            //rectangle = new Rectangle();
+            
             
             
           startDrag = new Point(e.getX(), e.getY());
@@ -68,8 +68,7 @@ import javax.swing.JComponent;
           
           rectangle.setWidth(Math.abs(endDrag.x - startDrag.x));
           rectangle.setHeight(Math.abs(endDrag.y - startDrag.y));
-          //rectangle.printData();
-          //rectangle.createTxt(rectangle.getFileName() ,rectangle.getStartDragX(), rectangle.getStartDragY(), rectangle.getWidth(), rectangle.getHeight());
+   
           startDrag = null;
           endDrag = null;
           repaint();
